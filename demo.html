@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Content</title>
+
+    <script>
+      // Dynamically load a stylesheet based on parameter in SRC from index.html.
+      // Use an IIFE (Immediately Invoked Function Expression) to speed up loading.
+      // (Using window.onload resulted in very slow loading.)
+      (function loadStyleSheet() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const stylesheetName = urlParams.get('style');
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = stylesheetName;
+          document.head.appendChild(link);
+      })();
+    </script>
+
+    <style>
+      body {
+        padding: 0 2px; /* Add some side padding to prevent clipping of focus outline. */
+      }
+
+      ul.text-examples {
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+        gap: 10px; /* Space between grid items */
+      }
+
+      div.list-examples,
+      div.tooltip-examples {
+        margin: 1.25em 0;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+        p {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+        ol, ul {
+          margin-bottom: 0;
+        }
+      }
+      div.list {
+        flex: 1 1 0;
+      }
+    </style>
+</head>
+<body>
+
+  <hgroup>
+    <h1>Heading 1, Heading 1, Heading 1, Heading 1, Heading 1</h1>
+    <p>Use H1 just once per page—for the page title.</p>
+  </hgroup>
+  <hgroup>
+    <h2>Heading 2, Heading 2, Heading 2, Heading 2, Heading 2</h2>
+    <p>Use H2 for sections of the page.</p>
+  </hgroup>
+  <hgroup>
+    <h3>Heading 3, Heading 3, Heading 3, Heading 3, Heading 3</h3>
+    <p>Use H3 for sub-sections.</p>
+  </hgroup>
+  <hgroup>
+    <h4>Heading 4, Heading 4, Heading 4, Heading 4, Heading 4</h4>
+    <p>Use H4 for... not much. It's generally recommended to avoid it.</p>
+  </hgroup>
+  <hgroup>
+    <h5>Heading 5, Heading 5, Heading 5, Heading 5, Heading 5</h5>
+    <p>Use H5 for... not much. It's generally recommended to avoid it.</p>
+  </hgroup>
+  <hgroup>
+    <h6>Heading 6, Heading 6, Heading 6, Heading 6, Heading 6</h6>
+    <p>Use H6 for... not much. It's generally recommended to avoid it.</p>
+    <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </hgroup>
+
+  <h2>Inline Text</h2>
+
+  <p>Below are some of the many <a href="https://www.w3schools.com/html/html_blocks.asp" target="_blank">inline elements</a> available in HTML. The HTML tag for each element is denoted in brackets.</p>
+
+  <ul class="text-examples">
+    <li><i>(i)talic</i> / <em>(em)phasized</em></li>
+    <li><b>(b)old</b> / <strong>(strong)</strong></li>
+    <li><dfn>definition (dfn)</dfn></li>
+
+    <li><u>(u)nderlined</u></li>
+    <li><abbr tabindex="0" data-tooltip="full text">(abbr)eviated</abbr></li>
+    <li><q>(q)uotation</q></li>
+    
+    <li><a href="">link (a)</a></li>
+    <li><mark><a href="">(mark)ed link</a></mark></li>
+    <li><mark>(mark)ed text</mark></li>
+
+    <li>text <small>(small)</small></li>
+    <li>text<sub>(sub)scripted</sub></li>
+    <li>text<sup>(sup)erscripted</sup></li>
+
+    <li><s>(s)trikethrough</s></li>
+    <li><del>(del)eted text</del></li>
+    <li><ins>(ins)erted text</ins></li>
+
+    <li><code>(code)</code></li>
+    <li><code class="dark">(code) .dark</code></li>
+    <li><kbd>keyboard (kbd)</kbd></li>
+    
+    <li>regular text</li>
+  </ul>
+
+  <h2>Lists</h2>
+
+  <p>There are 3 types of lists in HTML:</p>
+
+  <ol type="i">
+    <li>Ordered lists</li>
+    <li>Unordered lists</li>
+    <li>Definition lists</li>
+  </ol>
+
+  <h3>Ordered lists</h3>
+
+  <p>There are many pre-made ordered list styles included in HTML and CSS. One way that they can be set is by adding the <code>type=""</code> attribute to the <code>&lt;ol&gt;</code> HTML tag. Here are just 3 examples...</p>
+
+  <div class="list-examples">
+
+    <div class="list">
+      <p>Using <b>numbers</b> (default):</p>
+      <ol>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ol>
+    </div>
+
+    <div class="list">
+      <p>Using <b>letters</b> (type "A"):</p>
+      <ol type="A">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ol>
+    </div>
+
+    <div class="list">
+      <p>Using <b>Roman #s</b> (type "I"):</p>
+      <ol type="I">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <h3>Unordered lists</h3>
+
+  <p>There are 3 pre-made unordered list styles (discs, circles, and squares) included in CSS. However, unlike with ordered lists and their "type" attribute, in unordered lists the different styles cannot be directly set from the HTML itself.</p>
+    
+  <p>So in Toddy.css, we added the custom classes <code>class="circles"</code> and <code>class="squares"</code> that can be added to the <code>&lt;ul&gt;</code> HTML tag.</p>
+
+  <div class="list-examples">
+    <div class="list">
+      <p>Using "<b>discs</b>" (default):</p>
+      <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ul>
+    </div>
+    <div class="list">
+      <p>Using "<b>circles</b>":</p>
+      <ul class="circle">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ul>
+    </div>
+    <div class="list">
+      <p>Using "<b>squares</b>":</p>
+      <ul class="square">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>You can also replace bullets with <u>emojis and unicode symbols</u>. In Toddy.css, we included 3 common ones that can be activated by adding <code>class="emoji emojiname"</code> to the <code>&lt;ul&gt;</code> HTML tag.</p>
+
+  <div class="list-examples">
+    <div class="list">
+      <p>Using <b>checkmark</b>:</p>
+      <ul class="emoji checkmark">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ul>
+    </div>
+    <div class="list">
+      <p>Using <b>crossmark</b>:</p>
+      <ul class="emoji crossmark">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ul>
+    </div>
+    <div class="list">
+      <p>Using <b>target</b>:</p>
+      <ul class="emoji target">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+        <li>Item 5</li>
+      </ul>
+    </div>
+
+  </div>
+
+
+  <h3>Definition lists</h3>
+
+  <p>You can make definition lists using the <code>&lt;dl&gt;</code>, <code>&lt;dt&gt;</code>, and <code>&lt;dd&gt;</code> HTML tags. Below is an example of how these look like.</p>
+
+  <dl>
+    <dt>Definition title</dt>
+    <dd>Definition details... lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dd>
+    <dt>Definition title</dt>
+    <dd>Definition details... lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dd>
+    <dt>Definition title</dt>
+    <dd>Definition details... lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dd>
+  </dl>
+  
+  <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+  <h2>Quotes</h2>
+
+  <p>You can make blockquotes using the <code>&lt;blockquote&gt;</code> HTML tag, and citations with the <code>&lt;cite&gt;</code> HTML tag. Below is an example of how a blockquote element looks between two paragraphs...</p>
+
+  <blockquote>
+      <p>Blockquote: I choose a lazy person to do a hard job, because a lazy person will find an easy way to do it.</p>
+      <cite>– Cite: Bill Gates</cite>
+  </blockquote>
+
+  <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+  <h2>Code</h2>
+
+  <p>In addition to <code>inline code</code> using the <code>&lt;code&gt;</code> HTML tag, you can make full blocks of pre-formatted text using the <code>&lt;pre&gt;</code> HTML tag:</p>
+
+  <pre>
+    Code block using &lt;pre&gt;&lt;/pre&gt;.
+    css {
+        test: 1;
+    }
+  </pre>
+
+  <p>And in Toddy.css, if you add <code>class="dark"</code> to the <code>&lt;pre&gt;</code> HTML tag, you'll get...</p>
+
+  <pre class="dark">
+    Code block using &lt;pre class="dark"&gt;&lt;/pre&gt;.
+    css {
+        test: 1;
+    }
+  </pre>
+
+  <p>Bonus: You can use <a href="http://prismjs.com/" target="_blank">Prism.js</a> to dynamically style your code.</p>
+
+
+  <h2>Details & Summary</h2>
+
+  <p>You can make collapsible detail & summary elements using the <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> HTML tags. Below is an example of how these look like side by side to each other.</p>
+
+  <details open>
+    <summary>Summary</summary>
+    <p>Details can start in an open state by using the <code>&lt;details open&gt;</code> HTML tag.</p>
+  </details>
+
+  <details>
+    <summary>Summary</summary>
+    <p>Details are hidden by default.</p>
+  </details>
+
+  <details>
+    <summary>Summary</summary>
+    <p>Details are hidden by default.</p>
+  </details>
+
+  <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+  <h2>Alerts</h2>
+
+  <p>With Toddy.css, you can turn a paragraph into an alert by adding <code>class="alert"</code> to the <code>&lt;p&gt;</code> HTML tag.</p>
+
+  <p class="alert">
+  <strong>Alert!</strong>
+    This is the default alert styling using the primary color.
+  </p>
+
+  <span class="alert neutral">
+    <strong>Disabled!</strong>
+    Made using class="alert disabled" or class="alert neutral".
+  </span>
+
+  <p class="alert info">
+    <strong>ⓘ Info!</strong>
+    Made using class="alert info".
+  </p>
+
+  <p class="alert success">
+    <strong>✓ Success!</strong>
+    Made using class="alert success".
+  </p>
+
+  <p class="alert warning">
+    <strong>⚠ Warning!</strong>
+    Made using class="alert warning".
+  </p>
+
+  <p class="alert fail">
+    <strong>✗ Error!</strong>
+    Made using class="alert error" or class="alert dull".
+  </p>
+
+
+  <h2>Horizontal Rule</h2>
+
+  <p>You can make a horizontal rule (HR) separator using the <code>&lt;hr&gt;</code> HTML tag. It is mostly used to create a thematic break between sections of content..</p>
+
+  <hr>
+
+  <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+  <h2>Tooltips</h2>
+
+  <p>In HTML, the default way of adding a tooltip to an element is via the <code>title=""</code> attribute. However, these default tooltips can be slow to appear and cannot be styled using CSS.</p>
+
+  <p>There are two main ways of making tooltips using CSS and Toddy.css supports BOTH of them:</p>
+
+  <ul class="emoji checkmark">
+    <li>using the <code>data-*</code> attribute, or</li>
+    <li>using custom classes and nested elements.</li>
+  </ul>
+
+  <p>And you can make even more advanced tooltips using JavaScript (JS). However, in Toddy.css, we tried to first make tooltips the best possible with <b>CSS-only</b> (no JavaScript).</p>
+    
+  <p>The <b>limitation</b> of CSS-only: there is no good way to prevent the tooltip from being cutoff if it is too close to the side of the window. The <b>solution</b> for this—without causing other side effects—can only be done in JavaScript. So we've added an <u>optional</u> toddy.js file to enhance tooltip behaviour.</p>
+
+  <h3>Tooltips using the Data- attribute</h3>
+  
+  <p>The benefit of making tooltips using the <code>data-*</code> attribute is that it can be done using just one pair of HTML tags, as shown below:</p>
+
+  <pre>
+  &lt;span data-tooltip="Tooltip child text (visible on-hover)." tabindex="0"&gt;
+  Tooltip parent text (visible always).
+  &lt;/span&gt;
+  </pre>
+
+  <p>The limitation of this approach is that users cannot highlight or copy the tooltip contents—though sometimes this behaviour is desired.</p>
+
+  <hr>
+
+  <div class="tooltip-examples">
+
+    <p style="text-align:left">
+      <span tabindex="0" class="css-only" data-tooltip="This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.">CSS-only Tooltip</span>
+      <br><small>(left-overflow)</small>
+    </p>
+
+    <p style="text-align:center">
+      <span tabindex="0" class="css-only" data-tooltip="This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.">CSS-only Tooltip</span>
+      <br><small>(no overflow)</small>
+    </p>
+
+    <p style="text-align:right">
+      <span tabindex="0" class="css-only" data-tooltip="This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.">CSS-only Tooltip</span>
+      <br><small>(right-overflow)</small>
+    </p>
+
+  </div>
+  <div class="tooltip-examples">
+
+    <p style="text-align:left">
+      <span tabindex="0" data-tooltip="This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.">Tooltip w/ JS</span>
+      <br><small>(left-overflow)</small>
+    </p>
+
+    <p style="text-align:center">
+      <span tabindex="0" data-tooltip="This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.">Tooltip w/ JS</span>
+      <br><small>(no overflow)</small>
+    </p>
+
+    <p style="text-align:right">
+      <span tabindex="0" data-tooltip="This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.">Tooltip w/ JS</span>
+      <br><small>(right-overflow)</small>
+    </p>
+
+  </div>
+
+  <hr>
+
+  <h3>Tooltips using classes and nested elements</h3>
+
+  <p>The downside of tooltips made using classes and nested elements is that the code will be larger, as shown below:</p>
+
+  <pre>
+    &lt;abbr class="tooltip-parent" tabindex="0"&gt;
+      Tooltip parent text (visible always).
+      &lt;span class="tooltip"&gt;
+      Tooltip child text (visible on-hover).
+      &lt;/span&gt;
+    &lt;/abbr&gt;
+  </pre>
+
+  <p>However, the benefit is that:</p>
+
+  <ul class="emoji checkmark">
+    <li>It allows users to highlight and copy text content from inside the tooltip.</li>
+    <li>It makes it easier to add behaviour in Javascript. Toddy.css includes an <u>optional</u> toddy.js file that improves keyboard accessibility by allowing tooltips to be toggled using the <kbd>Enter</kbd> and <kbd>Escape</kbd> keys.</li>
+  </ul>
+
+  <hr>
+
+  <div class="tooltip-examples">
+
+    <p style="text-align:left">
+      <abbr class="tooltip-parent css-only" tabindex="0">
+        CSS-only Tooltip
+        <span class="tooltip">This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.</span>
+      </abbr>
+      <br><small>(left-overflow)</small>
+    </p>
+  
+    <p style="text-align:center">
+      <abbr class="tooltip-parent css-only" tabindex="0">
+        CSS-only Tooltip
+        <span class="tooltip">This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.</span>
+      </abbr>
+      <br><small>(no overflow)</small>
+    </p>
+  
+    <p style="text-align:right">
+      <abbr class="tooltip-parent css-only" tabindex="0">
+        CSS-only Tooltip
+        <span class="tooltip">This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.</span>
+      </abbr>
+      <br><small>(right-overflow)</small>
+    </p>
+
+  </div>
+
+  <div class="tooltip-examples">
+
+    <p style="text-align:left">
+      <abbr class="tooltip-parent" tabindex="0">
+        Tooltip w/ JS
+        <span class="tooltip">This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.</span>
+      </abbr>
+      <br><small>(left-overflow)</small>
+    </p>
+  
+    <p style="text-align:center">
+      <abbr class="tooltip-parent" tabindex="0">
+        Tooltip w/ JS
+        <span class="tooltip">This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.</span>
+      </abbr>
+      <br><small>(no overflow)</small>
+    </p>
+  
+    <p style="text-align:right">
+      <abbr class="tooltip-parent" tabindex="0">
+        Tooltip w/ JS
+        <span class="tooltip">This is an example of a long sentence, kinda like the security line at the airport when you’re already late for your flight.</span>
+      </abbr>
+      <br><small>(right-overflow)</small>
+    </p>
+
+  </div>
+
+  <hr>
+
+
+  <h2>Figures & Captions</h2>
+
+  <p>You can wrap almost any content in a <code>&lt;figure&gt;</code> HTML tag to give it captions. The captions themselves are written inside of a <code>&lt;figcaption&gt;</code> HTML tag. Below are some examples.</p>
+
+  <figure>
+    <table>
+      <tr>
+        <th>TH1</th>
+        <th>TH2</th>
+        <th>TH3</th>
+      </tr>
+      <tr>
+        <td>Row1-Col1</td>
+        <td>Row1-Col2</td>
+        <td>Row1-Col3</td>
+      </tr>
+      <tr>
+        <td>Row2-Col1</td>
+        <td>Row2-Col2</td>
+        <td>Row2-Col3</td>
+      </tr>
+      <tr>
+        <td>Row3-Col1</td>
+        <td>Row3-Col2</td>
+        <td>Row3-Col3</td>
+      </tr>
+    </table>
+    <figcaption>Caption for table</figcaption>
+  </figure>
+
+  <figure>
+    <pre>
+    Code block using &lt;pre&gt;&lt;/pre&gt;.
+    css {
+        test: 1;
+    }
+    </pre>
+    <figcaption>Caption for code sample.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="image4.jpg" alt="">
+    <figcaption>Caption for image.</figcaption>
+  </figure>
+
+  <figure>
+    <video controls>
+      <source src="coconut.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <figcaption>Caption for video.</figcaption>
+  </figure>
+
+  <figure>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/vEA8HpR_Azw?si=_TZpixa8hPluZYvN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <figcaption>Caption for iframe.</figcaption>
+  </figure>
+
+  <figure>
+    <audio controls>
+      <source src="calm-waves-8052.m4a" type="audio/mp4">
+      Your browser does not support the audio element.
+    </audio>
+    <figcaption>Caption for audio.</figcaption>
+  </figure>
+
+
+  <h2>Tables</h2>
+
+  <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+  <table>
+    <tr>
+      <th>TH1</th>
+      <th>TH2</th>
+      <th>TH3</th>
+    </tr>
+    <tr>
+      <td>Row1-Col1</td>
+      <td>Row1-Col2</td>
+      <td>Row1-Col3</td>
+    </tr>
+    <tr>
+      <td>Row2-Col1</td>
+      <td>Row2-Col2</td>
+      <td>Row2-Col3</td>
+    </tr>
+    <tr>
+      <td>Row3-Col1</td>
+      <td>Row3-Col2</td>
+      <td>Row3-Col3</td>
+    </tr>
+    <tr>
+      <td>Row4-Col1</td>
+      <td>Row4-Col2</td>
+      <td>Row4-Col3</td>
+    </tr>
+    <tr>
+      <td>Row5-Col1</td>
+      <td>Row5-Col2</td>
+      <td>Row5-Col3</td>
+    </tr>
+    <tfoot>
+      <tr>
+        <td>Total</td>
+        <td>ABC</td>
+        <td>XYZ</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <p>You can add striped background shading to table rows using <code>&lt;class="striped"&gt;</code>.</p>
+
+  <table class="striped">
+    <tr>
+      <th>TH1</th>
+      <th>TH2</th>
+      <th>TH3</th>
+    </tr>
+    <tr>
+      <td>Row1-Col1</td>
+      <td>Row1-Col2</td>
+      <td>Row1-Col3</td>
+    </tr>
+    <tr>
+      <td>Row2-Col1</td>
+      <td>Row2-Col2</td>
+      <td>Row2-Col3</td>
+    </tr>
+    <tr>
+      <td>Row3-Col1</td>
+      <td>Row3-Col2</td>
+      <td>Row3-Col3</td>
+    </tr>
+    <tr>
+      <td>Row4-Col1</td>
+      <td>Row4-Col2</td>
+      <td>Row4-Col3</td>
+    </tr>
+    <tr>
+      <td>Row5-Col1</td>
+      <td>Row5-Col2</td>
+      <td>Row5-Col3</td>
+    </tr>
+    <tfoot>
+      <tr>
+        <td>Total</td>
+        <td>ABC</td>
+        <td>XYZ</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+  <h2>Images</h2>
+
+  <p>Below are examples of <code>&lt;image&gt;</code> elements, and how they can be styled by adding <code>&lt;class="border"&gt;</code> and/or <code>&lt;class="shadow"&gt;</code>.</p>
+
+  <img src="image1-500px.jpg" alt="">
+
+  <img src="image2-500px.jpg" alt="" class="border">
+
+  <img src="image3-500px.jpg" alt="" class="shadow">
+
+  <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+  <h2>iFrames</h2>
+
+  <p>Below is an embedded <code>&lt;iframe&gt;</code> showing a video from YouTube:</p>
+
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/vEA8HpR_Azw?si=_TZpixa8hPluZYvN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+  <h2>Video</h2>
+
+  <p>Below is a <code>&lt;video&gt;</code> file using the browser's default controls:</p>
+
+  <video controls>
+    <source src="coconut.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <p>And as with images, you can add <code>&lt;class="border"&gt;</code> and/or <code>&lt;class="shadow"&gt;</code> to videos.</p>
+
+
+  <h2>Audio</h2>
+
+  <p>Below is an <code>&lt;audio&gt;</code> file using the browser's default controls:</p>
+
+  <audio controls>
+    <source src="calm-waves-8052.m4a" type="audio/mp4">
+    Your browser does not support the audio element.
+  </audio>
+
+  <audio controls>
+    <source src="calm-waves-8052.m4a" type="audio/mp4">
+    Your browser does not support the audio element.
+  </audio>
+
+  <p>Below is a variation using <code>class="dark"</code>:</p>
+
+  <audio controls class="dark">
+    <source src="calm-waves-8052.m4a" type="audio/mp4">
+    Your browser does not support the audio element.
+  </audio>
+
+  <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+  <script src="toddy.js"></script>
+
+</body>
+</html>

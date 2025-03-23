@@ -1,0 +1,874 @@
+/* Toddy.css - Version 0.1.0 (March 2025) */
+
+/* GLOBAL VARIABLES. */
+:root {
+  /* Define font-families using only pre-installed system fonts. */
+  --serif-fonts: Georgia, Cambria, "Roboto Serif", "Times New Roman", Times, serif;
+  /*
+    Georgia          -> Pre-installed on Apple & Windows devices.
+    Times New Roman  -> Pre-installed on Apple & Windows devices.
+    Times            -> Pre-installed on Apple devices.
+    Cambria          -> Pre-installed on Windows devices; available to macOS via Microsoft Office.
+    Roboto Serif     -> Pre-installed on Android devices; available to all devices via Google Fonts.
+  */
+  --sans-fonts: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* 
+    San Francisco   -> Pre-installed on Apple devices. Cannot be directly called. Need to use "-apple-system" or "BlinkMacSystemFont".
+    Segoe UI        -> Pre-installed on Windows devices.
+    Helvetica Neue  -> Pre-installed on Apple devices.
+    Helvetica       -> Pre-installed on Apple devices.
+    Roboto          -> Pre-installed on Android devices; available to other devices via Google Fonts.
+    Arial           -> Pre-installed on Apple and Windows devices.
+  */
+  --mono-fonts: Menlo, Monaco, Consolas, "Ubuntu Mono", monospace;
+  /*
+    Menlo         -> Pre-installed on Apple devices.
+    Monaco        -> Pre-installed on Apple devices.
+    Consolas      -> Pre-installed on Windows devices; available on macOS via Microsoft Office.
+    Ubuntu Mono   -> Pre-installed on Ubuntu/Linux devices; available to all devices via Google Fonts.
+    Side note: Ubuntu Mono has much narrower spacing than Menlo, Monaco, and Consolas.
+  */
+
+  /* Define variables for colors. */
+  /* A good starting point is http://picocss.com/docs/colors */
+  --color-primary-dark:   #7A4400; /* Pico Pumpkin 650; for selection text */
+  --color-primary:        #9C5900; /* Pico Pumpkin 550 */
+  --color-primary-lite:   #BF6E00; /* Pico Pumpkin 450; for focus outline, hr, and h2 underline */
+  --color-primary-litest: #FCDCC1; /* Pico Pumpkin 100; for selection bg */
+  --color-primary-brite:  #FCCA9B; /* Pico Pumpkin 150; for code text in darkmode */
+
+  --color-bg:             #FFF;
+  --color-bg-accent:      #F9F9F9; /* For code, summary, tables */
+
+  --color-text:           #212121;
+  --color-text-lite:      #444;    /* For code, pre, kbd */
+  --color-text-litest:    #585858; /* For captions, cite, quote */
+
+  --color-border:         #8E8E8E; /* For summary, media */
+  --color-border-lite:    #E5E5E5; /* For code, pre */
+  --color-border-litest:  #F1F1F1; /* For tables */
+
+  /* Define variables for components. */
+  --color-selection:         var(--color-primary-dark);
+  --color-selection-bg:      var(--color-primary-litest);
+
+  --color-h1:                var(--color-text);
+  --color-h2:                var(--color-primary);
+  --color-h3:                #373C44;
+  --color-h4:                #424751;
+  --color-h5:                #4D535E;
+  --color-h6:                #5C6370;
+
+  --color-blockquote:        var(--color-text-litest);
+  --color-caption:           var(--color-text-litest);
+  --color-cite:              var(--color-text-litest);
+  --color-definition:        var(--color-text);      /* For: <dt>, <dfn> */
+  --color-emphasis:          var(--color-text);
+  --color-link:              var(--color-primary);
+  --color-link-hover:        var(--color-primary);
+  --color-link-marked:       var(--color-primary);
+  --color-link-marked-hover: var(--color-primary);
+  --color-quote:             var(--color-text);
+  --color-quote-marks:       var(--color-text);
+  
+  --color-mark:              var(--color-text);
+  --color-mark-bg:           #ffdd33;
+  --color-mark-border:       #ffdd33;
+
+  --color-code:              var(--color-text-lite);
+  --color-code-bg:           var(--color-bg-accent);   /* Formerly #F9F9F9 */
+  --color-code-border:       var(--color-border-lite); /* Formerly #E5E5E5 */
+
+  --color-summary-bg:        var(--color-bg-accent);   /* Formerly #F5F5F5 */
+  --color-summary-border:    var(--color-border);      /* Formerly #898EA4 */
+
+  --color-table-th:          var(--color-text);
+  --color-table-bg:          var(--color-bg-accent);
+  --color-table-border:      var(--color-border-litest);
+
+  --color-alert:             var(--color-bg);
+  --color-alert-bg:          var(--color-primary);
+  --color-alert-border:      var(--color-primary);
+ 
+  --color-tooltip:           var(--color-bg);        /* #FFF */
+  --color-tooltip-bg:        var(--color-primary);
+  --color-tooltip-border:    var(--color-primary);
+
+  --color-kbd:               var(--color-text-lite);
+  --color-kbd-bg:            var(--color-bg);        /* #FFF */
+  --color-kbd-border:        var(--color-text-lite);
+
+  --darkmode-color-code:        var(--color-primary-brite); /* Formerly E0AFFF */
+  --darkmode-color-code-bg:     #2b2b2b;
+  --darkmode-color-code-border: #444;
+
+  /* Variables for State & Feedback Colors */
+  --color-focus:       var(--color-primary-lite);
+  --color-disabled:    #585858;
+  --color-info:        #2196F3;
+  --color-success:     #04AA6D; /* Also used for Inserted <ins> text */
+  --color-warning:     #ff9800;
+  --color-error:       #f44336; /* Also used for Deleted <del> text */
+  
+  /* Define variables for margin & padding spacing. */
+  --spacing-xs: 0.25rem;  /*  4px - Extra Small */
+  --spacing-sm: 0.5rem;   /*  8px - Small */
+  --spacing-md: 1rem;     /* 16px - Medium */
+  --spacing-lg: 1.5rem;   /* 24px - Large */
+  --spacing-xl: 2rem;     /* 32px - Extra Large */
+
+  /* Define variables for font sizes. */
+  --font-xs: 0.8125rem;   /* 13px - Extra Small (NOT USED) */
+  --font-sm: 0.875rem;    /* 14px - Small       (Used in cite, code, pre, kbd, figcaption, tooltip) */
+  --font-md: 1rem;        /* 16px - Medium      (NOT USED) */
+  --font-lg: 1.0625rem;   /* 17px - Large       (Used in Tables, Alerts) */
+  --font-xl: 1.125rem;    /* 18px - Extra Large (Used in Body) */
+
+  /* Other */
+  --border-radius: 5px;
+}
+
+/* ------------------------- Selection ------------------------- */
+/* Styling for content that is user selected (user "highlighted"). */
+::selection {
+  /* color:            var(--color-selection); */
+  background-color: var(--color-selection-bg);
+  /* 
+    Note: Safari does NOT respect the background color. It will add some opacity to it.
+    See https://github.com/w3c/csswg-drafts/issues/6853 
+  */
+}
+
+/* Styling for LINKS that are user selected (user "highlighted"). */
+a::selection {
+  /* Make sure that selected links are still distinguishable from other text. */
+  /* color: var(--color-marked-link); */
+}
+
+
+/* ------------------------- Focus ------------------------- */
+/* 
+  Note about Safari vs Chrome:
+  By default, keyboard Tab focus does not work as comprehensively in Safari as in Chrome.
+  In Safari, you will need to go to Settings > Advanced and enable "Press Tab to highlight each item on a webpage".
+*/
+
+/* Focus styling for Mouse Click AND Tab Keyboard Navigation */
+*:focus {
+}
+
+/* Focus styling for just Tab Keyboard Navigation */
+*:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: -1px !important;
+  transition: outline 0s; /* Remove animations from focus. */
+}
+
+/* Focus styling for links and tooltip parents */
+a:focus,
+[data-tooltip]:focus,
+[tabindex="0"]:focus {
+  outline-width:  2px;
+  outline-offset: 1px !important;
+  border-radius:  var(--border-radius);
+}
+
+/* Focus styling for valid fields */
+[aria-invalid="false"]:focus {
+  outline-color: var(--color-success);
+}
+
+/* Focus styling for invalid fields */
+input:invalid:focus,
+[aria-invalid="true"]:focus {
+  outline-color: var(--color-error);
+}
+
+/* Focus styling for audio controls */
+audio:focus {
+  outline-width: 2px !important;
+  border-radius: var(--border-radius);
+  /* Browser BUG: the focus outline does not display properly in Safari. */
+}
+
+
+/* ------------------------- Universal Reset ------------------------- */
+/* Helps avoid inconsistencies in spacing & dimensions across different browsers. */
+*, 
+*::before, 
+*::after {
+  margin:  0;              /* Reset margin for all elements. */
+  padding: 0;              /* Reset padding for all elements. */
+  box-sizing: border-box;  /* When calculating width & height for elements, 
+                              make sure padding and border sizes are included. */
+}
+
+/* Ensure that root elements fill the full viewport. */
+html, body {
+  width:  100%;   /* Avoid 100vw because it can include the scrollbar. */
+  height: 100vh;  /* Force full-viewport height, even with no content. */
+}
+
+html {
+  font-size:   16px;              /* Set reference size for 1rem. */
+  font-family: var(--sans-fonts); /* Set the font globally. */
+  scroll-behavior: smooth;        /* Makes in-page scrolling transitions smooth, instead of instant. */
+}
+body {
+  color:       var(--color-text);
+  font-size:   var(--font-xl);     /* Equals 18px */
+  line-height: 1.5;
+  overflow-wrap: break-word; /* Global protection against layout-breaking long words. */
+  word-break: break-word;    /* Fallback for older browsers. */
+}
+
+/* ------------------------- Headers & Paragraphs ------------------------- */
+
+h1, h2, h3 {
+  margin-top:    1.25em;
+  margin-bottom: 0.625em;
+  line-height:   1.1;      /* Less than body's default of 1.5 */
+}
+h1 { 
+  color: var(--color-h1);
+  font-size:   2rem; 
+}
+h2 { 
+  color: var(--color-h2);
+  font-size:   1.75rem;
+}
+h3 { 
+  color: var(--color-h3);
+  font-size:   1.5rem; 
+}
+
+h4, h5, h6 {
+  margin-top:    var(--spacing-xl);  /* 2rem */
+  margin-bottom: var(--spacing-md);  /* 1rem */
+  line-height:   1.1;
+}
+h4 { 
+  color: var(--color-h4);
+  font-size: 1.25rem; 
+}
+h5 { 
+  color: var(--color-h5);
+  font-size: 1.125rem; 
+}
+h6 { 
+  color: var(--color-h6);
+  font-size: 1rem; 
+}
+
+small { font-size: smaller; }
+
+p {
+  margin: var(--spacing-lg) 0;  /* 1.5rem */
+  line-height: 1.5;             /* Same as body's default of 1.5 */
+}
+
+/* ------------------------- Quotes ------------------------- */
+
+/* <q> is short, inline quotations */
+q {
+  color: var(--color-quote);
+}
+q::before,
+q::after {
+  color: var(--color-quote-marks);
+}
+
+/* <blockquote> is large, block quotations */
+blockquote {
+  display: block;
+  margin-top:          var(--spacing-lg);
+  margin-bottom:       var(--spacing-lg);
+  margin-inline-start: var(--spacing-lg);
+  margin-inline-end:   var(--spacing-lg);
+  border-inline-start: var(--spacing-xs) solid var(--color-primary);
+  padding:             var(--spacing-sm) var(--spacing-md); /* Formerly 0.4rem 0.8rem */
+  color:               var(--color-blockquote);
+  font-style:          normal;
+}
+blockquote > p {
+  margin: 0;  /* Remove margin from parapraphs inside of blockquote. */
+}
+
+/* Citation text - Usually found inside of Blockquote */
+cite {
+  color:      var(--color-cite);
+  font-size:  var(--font-sm); /* Formerly 0.9rem */
+  font-style: italic;
+}
+
+/* ------------------------- Ordered & Unordered Lists ------------------------- */
+
+/* Remove margin below paragraphs that appear just before a list. */
+p:has(+ ol),
+p:has(+ ul) {
+  margin-bottom: 0;
+}
+
+/* Ordered Lists & Unordered Lists */
+ol, ul {
+  padding-inline-start: 40px;
+  margin: var(--spacing-md) 0;
+}
+/* Reduce indent for lists in mobile view. */
+@media (max-width: 450px) {
+  ol, ul {
+    padding-inline-start: 25px; 
+  }
+}
+/* Reduce indent for lists inside of summary > details element. */
+details ol,
+details ul {
+  padding-inline-start: 30px;
+}
+
+/* Unordered lists - Default bullets */
+ul.circle   { list-style-type: circle; }
+ul.square   { list-style-type: square; }
+
+/* Unordered lists - Emoji bullets */
+ul.emoji li {
+  padding-left: 5px; /* Increase separation between list item and emoji bullet. */
+}
+ul.emoji li::marker {
+  font-size: 1rem;   /* Make the emoji slightly smaller than the default 1.1rem. */
+}
+ul.checkmark { list-style: "✅ "; }
+ul.crossmark { list-style: "❌ "; }
+ul.target    { list-style: "🎯 "; }
+ul.coconut   { list-style: "🥥 "; }
+ul.pin       { list-style: "📍 "; }
+
+
+/* ------------------------- Definition Lists ------------------------- */
+
+/* Definition List container (parent of <dt> & <dd>) */
+dl {
+  /* margin-inline-start: 20px; */
+}
+
+/* Definition Title */
+dt, dfn {
+  font-weight: bold;
+  font-style:  italic;
+  color: var(--color-definition);
+}
+dt {
+  margin-top:    var(--spacing-lg); /* Same as paragraph */
+  margin-bottom: 0;
+}
+
+/* Definition Description */
+dd {
+  margin-inline-start: var(--spacing-lg); /* Formerly 20px */
+  margin-top:    0;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ------------------------- Inline Text ------------------------- */
+
+/* Emphasized text */
+em {
+  color: var(--color-emphasis);
+  font-style:  italic;
+}
+
+/* Deleted text */
+del {
+  color: var(--color-error);
+}
+
+/* Inserted text */
+ins {
+  color: var(--color-success);
+  text-decoration: none;
+}
+
+/* Marked text (aka Highlighted text) */
+mark {
+  color:            var(--color-mark);
+  background-color: var(--color-mark-bg);
+  border: 1px solid var(--color-mark-border);
+  border-radius:    var(--border-radius);
+  padding: 0.1rem 0.4rem; /* Similar to <code> and <kbd>. */
+                          /* However, needs less top/bottom padding due to normal size text. */
+                          /* Formerly, padding: 2px 5px; */
+}
+
+/* Superscripts & subscripts */
+sup, sub {
+  vertical-align: baseline;  /* Prevent sups & subs from affecting line-height. */
+  position: relative;        /* Prevent sups & subs from affecting line-height. */
+}
+sup { top: -0.4em; }
+sub { top: 0.3em; }
+
+
+/* ------------------------- Code Elements ------------------------- */
+
+code,
+pre,
+kbd {
+  font-family:      var(--mono-fonts);
+  font-size:        var(--font-sm);
+  color:            var(--color-code);
+  background-color: var(--color-code-bg);     /* Formerly #F9F9F9 */
+  border: 1px solid var(--color-code-border); /* Formerly #E5E5E5 */
+  border-radius:    var(--border-radius);
+}
+
+kbd {
+  color:               var(--color-kbd);
+  background-color:    var(--color-kbd-bg);
+  border:    1px solid var(--color-kbd-border);
+  border-bottom-width: 3px;
+}
+
+code,
+kbd {
+  padding: 0.2rem 0.4rem; /* similar to <mark> */
+  /* margin-left: 0.1rem; */
+  /* margin-right: 0.1rem; */
+}
+
+code.dark,
+pre.dark {
+  color:            var(--darkmode-color-code);
+  background-color: var(--darkmode-color-code-bg);
+  border: 1px solid var(--darkmode-color-code-border);
+}
+
+pre {
+  display:   block;
+  max-width: 100%;
+  margin:  var(--spacing-md) 0;
+  padding: var(--spacing-md) 0;
+  white-space: pre-wrap;
+  /* 
+    AVOID: overflow: auto; 
+    This caused a horizontal scroll bar to appear even when not needed, 
+    and that caused the code block to get included on-focus when navigating using TAB button. 
+  */
+}
+
+
+/* ------------------------- Accordian ------------------------- */
+/* Note: <details> is the parent; <summary> is the child. */
+
+details {
+  display: block;
+  width: 100%;
+  padding:  0.75rem var(--spacing-md);
+  margin-top:       var(--spacing-md);
+  margin-bottom:    var(--spacing-md);
+  background-color: var(--color-summary-bg);
+  border: 1px solid var(--color-summary-border);
+  border-radius:    var(--border-radius);
+}
+
+summary {
+  font-weight: bold;
+  padding: 0.75rem var(--spacing-md);             /* Should be same as padding for details. */
+  margin: -0.75rem calc(-1 * var(--spacing-md));  /* Should be opposite of padding. */
+  border-radius:   var(--border-radius);
+  transition:  all 0.3s ease;  /* Animation for opening/closing the details. */
+}
+
+/* Style <summary> when <detatil> is open */
+details[open] > summary {
+  margin-bottom: var(--spacing-sm); /* At least 1px of margin-bottom is needed to prevent
+                                       detail's content from entering summary's space. */
+}
+/* Style the first element after <summary> */
+details[open] > summary + * {
+  margin-top: 0;
+}
+/* Style the last element inside of <detail> */
+details[open] > :last-child {
+  margin-bottom: 0;
+}
+
+
+/* ------------------------- Links ------------------------- */
+
+a,
+a:visited,
+summary {
+  cursor: pointer;
+  color:  var(--color-link);
+  text-decoration: none;
+}
+a:hover,
+summary:hover {
+  color:  var(--color-link-hover);
+  text-decoration: underline;
+}
+
+/* Links inside of Marked (Highlighted) text. */
+mark a {
+  color: var(--color-link-marked) !important;
+}
+mark a:hover {
+  color: var(--color-link-marked-hover) !important;
+}
+
+
+/* ------------------------- Tables ------------------------- */
+
+table {
+  width: 100%;
+  overflow-x: auto;               /* In case the table has very wide content. */
+  text-align: justify;
+  font-size:     var(--font-lg);  /* 17px, slightly smaller than default of 18px. */
+  margin-top:    var(--spacing-lg);
+  margin-bottom: calc(var(--spacing-lg) + var(--spacing-sm));
+  border-collapse: collapse;  /* Single border instead of separate border per cell. */
+}
+
+/* Table heading */
+tr > th {
+  font-weight:   bold;
+  color:         var(--color-table-th);
+  border-bottom: 2px solid var(--color-table-border);
+  padding:       var(--spacing-sm);
+}
+/* Table cells */
+tr > td {
+  border-bottom: 1px solid var(--color-table-border);
+  padding:       var(--spacing-sm);
+}
+/* Table footer */
+tfoot > tr > td {
+  font-weight:   bold;
+  border-top:    2px solid var(--color-table-border);
+  border-bottom: 2px solid var(--color-table-border);
+}
+
+/* Optional class for striped rows */
+table.striped tr:nth-child(even) {
+  /* Set every other cell slightly darker. Improves readability. */
+  background-color: var(--color-table-bg);
+}
+
+
+/* ------------------------- Separators ------------------------- */
+
+/* Horizontal Rule */
+hr {
+  width: 45px; /* Results in 5 dots */
+  border-top: 0;
+  border-bottom: 5px dotted var(--color-primary-lite);
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  background: none;
+  margin: var(--spacing-xl) auto; /* Centered */
+}
+
+
+/* ------------------------- Alerts  ------------------------- */
+/*
+  Used with <p> or <div>.
+  Colors inspired by https://w3schools.com/HOWTO/howto_js_alert.asp 
+*/
+
+.alert {
+  display: block;
+  width:   100%;
+  margin:    var(--spacing-lg) 0;
+  padding:   var(--spacing-md);
+  font-size: var(--font-lg);      /* Slightly smaller than Body's font-size. */
+  color:            var(--color-alert);
+  background-color: var(--color-alert-bg);
+  border: 1px solid var(--color-alert-border);
+  border-radius:    var(--border-radius);
+}
+.alert.disabled,
+.alert.neutral {
+  background-color: var(--color-disabled);
+  border-color:     var(--color-disabled);
+}
+.alert.info {
+  background-color: var(--color-info);
+  border-color:     var(--color-info);
+}
+.alert.success {
+  background-color: var(--color-success);
+  border-color:     var(--color-success);
+}
+.alert.warning {
+  background-color: var(--color-warning);
+  border-color:     var(--color-warning);
+}
+.alert.fail,
+.alert.error {
+  background-color: var(--color-error);
+  border-color:     var(--color-error);
+}
+
+
+/* ------------------------- Tooltips ------------------------- */
+/* Forked from Pico.css and then improved. */
+/* Requires:
+    A. A single HTML element with the attribute: data-tooltip="", or...
+    B. Nested HTML elements with a .tooltip-parent and .tooltip class. 
+*/
+/* Mostly used with <span> or <abbr> -- Abbreviated Text. */
+
+/*----------------------------*/
+/*  Tooltip parent/container  */
+/*----------------------------*/
+abbr,
+.tooltip-parent,
+[data-tooltip] {
+  position: relative; /* Needed for the tooltip to work. */
+  cursor: help;       /* Set the cursor to a '?' symbol. */
+  text-decoration-line: underline; /* Show users that there is more information. */
+  text-decoration-style: dotted;   /* Distinguish from link underline. */
+  text-underline-offset: 4px;      /* Browser default is 1px. */
+  --tooltip-offset-x:    0px;      /* Variable for overflow offset. */
+  --tooltip-arrow-size:  6px;      /* Variable for arrow size. */
+}
+
+/*-------------------*/
+/*  Tooltip content  */
+/*-------------------*/
+
+/* Shared properties for text content + arrow */
+.tooltip-parent .tooltip, 
+[data-tooltip]::before,
+[data-tooltip]::after {
+  /* Note: the "::after" might seem redundant, but it is critical 
+     to avoid a gap between the arrow and text content. */
+  position: absolute;
+  bottom: 110%;       /* Position the tooltip above it's parent. */
+  left: 50%;          /* Center the tooltip horizontally. */
+  z-index: 10;        /* Keep the tooltip layer on top of all other content. */
+
+  /* Center horizontally + verticeal offset for bottom arrow */
+  transform: translateX(calc(-50% + var(--tooltip-offset-x))) translateY(calc(-1 * var(--tooltip-arrow-size)));
+
+  /* Note: width 100% would be the width of parent text and NOT of max-width. */
+  width: max-content;         /* Prevent premature wrapping. */
+  max-width: 250px;           /* Limit the width of the tooltip. */
+  white-space:   normal;      /* Ensure wrapping. */
+  word-wrap:     break-word;  /* Allow breaking long words. */
+  overflow-wrap: break-word;  /* Extra precaution. */
+
+  /* Hide the tooltip until the parent is hovered on. */
+  visibility: hidden;     /* Ensures the tooltip is not clickable or interactable. */
+  opacity: 0;             /* Used with 'transition' for fade-in/fade-out effect. */
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+  /* Tooltip text content */
+  content:    attr(data-tooltip);
+  font-size:  var(--font-sm);   /* Formerly 12px */
+  text-align: left;
+  color:             var(--color-tooltip);
+  background-color:  var(--color-tooltip-bg);
+  border:  1px solid var(--color-tooltip-border);
+  border-radius:     var(--border-radius);
+  padding: 5px 8px;
+}
+
+/*----------------------*/
+/* Tooltip bottom arrow */
+/*----------------------*/
+.tooltip-parent .tooltip::after,
+[data-tooltip]::after {
+  content: "";
+  padding: 0;
+
+  /* Create 6x6 box */
+  border-top:   var(--tooltip-arrow-size) solid var(--color-tooltip-border);
+  border-right: var(--tooltip-arrow-size) solid transparent;
+  border-left:  var(--tooltip-arrow-size) solid transparent;
+  border-bottom: none;
+  border-radius: 0;
+  background: none; /* transparent */
+
+  /* Buggy code (creates extra space below bottom border for some reason):
+      border-width: 6px;
+      border-style: solid;
+      border-color: yellow transparent transparent transparent;
+      background-color: red;
+  */
+}
+[data-tooltip]::after {
+  transform: translate(-50%, 0);
+  width: max-content;
+}
+.tooltip-parent .tooltip::after {
+  position: absolute;
+  top: 100%;       /* Position the tooltip above it's parent. */
+  left: 50%;       /* Center the tooltip horizontally. */
+  margin-left: calc(-1 * var(--tooltip-arrow-size));
+  transform:   translate(calc(-1 * var(--tooltip-offset-x)), 0);
+}
+
+/*-----------------------*/
+/* Tooltip hover & focus */
+/*-----------------------*/
+/* 
+  Display the tooltip content on-hover or on-focus.
+  Note: For on-focus to work, make sure the HTML tag (e.g. <abbr>, <span>) contains: tabindex="0" 
+*/
+.tooltip-parent:hover .tooltip,
+.tooltip-parent:focus .tooltip,
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:focus::before,
+[data-tooltip]:focus::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ------------------------- Media ------------------------- */
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  display: block; /* Needed for margin auto to work. */
+  margin-inline: auto;
+  border-radius: var(--border-radius);
+}
+
+/* Add spacing between media that is next to each other. */
+/* Do NOT include audio; it has its own margin quirks. */
+img ~ img,
+video ~ video,
+iframe ~ iframe {
+  margin-top: var(--spacing-lg);
+}
+
+/* Optional class for borders */
+img.border,
+iframe.border,
+video.border {
+    border: 1px solid var(--color-border);
+}
+
+/* Optional class for shadow */
+img.shadow,
+iframe.shadow,
+video.shadow {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    max-width: calc(100% - 20px);  /* Deduct 2X the shadow amount from width. */
+    margin: var(--spacing-lg) auto;
+    /* To prevent the shadow from being clipped,
+        make sure that margin-top & margin-bottom
+        are equal to at least the shadow amount. */
+}
+
+audio {
+  width: 100%;
+  margin: 2px 0;
+  padding: 0 2px;
+  /* Browser BUG 1: Need some padding/margin for focus outline to display properly. */
+  /* Browser BUG 2: padding-top doesn't work properly in Safari for audio controls. */
+}
+audio.dark {
+  filter: invert(1);
+  /* Browser BUG: this also changes the on-focus color. */
+}
+
+
+/* ------------------------- Figures ------------------------- */
+
+figure {
+  max-width:  100%;
+  margin:     var(--spacing-lg) auto; /* same as for paragraph */
+  display:    block;
+  overflow-x: auto;
+}
+figcaption {
+  text-align: center;
+  color:      var(--color-caption);
+  font-size:  var(--font-sm);
+  margin-top: var(--spacing-sm);
+}
+
+/* For elements set to 100% width */
+figure > table,
+figure > pre {
+  margin: 0;
+}
+/* For elements that can be less than 100% width */
+figure > img,
+figure > iframe,
+figure > video {
+  display: block;
+  margin:  0 auto;
+}
+/* Do NOT add "figure > audio". Audio needs a minimum margin for focus outline. */
+
+
+/* --------------------------------------------------------------------------- */
+/* Print Mode */
+/* --------------------------------------------------------------------------- */
+
+@media print {
+  /* @page doesn't work so doing html instead */
+  html {
+    margin: 0 0.5cm;
+    background: none !important;
+  }
+  body {
+    display: block;
+  }
+
+  /* Hide header, nav, and footer */
+  body header,
+  body nav,
+  body footer,
+  .breadcrumbs {
+    display: none;
+  }
+  a {
+    /* text-decoration: none; */
+  }
+  a[href^="http"]::after {
+    /* content: " <" attr(href) ">";  *//* Show contents of links. */
+    content: none !important;           /* Do NOT show contents of links. */
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  p {
+    widows: 3;
+    orphans: 3;
+  }
+  hr {
+    border-top: 1px solid var(--color-border);
+  }
+  mark {
+    border: 1px solid var(--color-border);
+  }
+  pre, table, figure, img, svg {
+    break-inside: avoid;
+  }
+  pre code {
+    white-space: pre-wrap;
+  }
+}
+
+
+/* --------------------------------------------------------------------------- */
+/* Dark Mode */
+/* --------------------------------------------------------------------------- */
+
+/* Optional class for dark mode */
+body.dark-mode {
+    color: white;
+    background-color: black;
+    /* 
+      Work in Progress. 
+      Proper dark-mode support is coming in a later version.
+    */
+}
