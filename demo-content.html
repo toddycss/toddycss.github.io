@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Content</title>
+    <link id="themeStylesheet" rel="stylesheet" href="">
 
     <script>
       // Dynamically load a stylesheet based on parameter in SRC from index.html.
@@ -17,11 +18,37 @@
           link.href = stylesheetName;
           document.head.appendChild(link);
       })();
+
+      /* Start of Theme Toggle for Mobile Mode (part 2/2) */
+      document.addEventListener("DOMContentLoaded", function () {
+        const themeStylesheet = document.getElementById("themeStylesheet");
+        const body = document.body;
+
+        function applyTheme(theme) {
+            if (theme === "none") {
+                themeStylesheet.removeAttribute("href");
+                body.classList.remove("dark-mode");
+            } else if (theme === "light") {
+                themeStylesheet.setAttribute("href", "toddy.css");
+                body.classList.remove("dark-mode");
+            } else if (theme === "dark") {
+                themeStylesheet.setAttribute("href", "toddy.css");
+                body.classList.add("dark-mode");
+            }
+        }
+        // Listen for theme preference changes from the parent:
+        window.addEventListener("message", (event) => {
+            if (event.data.theme) {
+                applyTheme(event.data.theme);
+            }
+        });
+      });
+      /* End of Theme Toggle for Mobile Mode (part 2/2) */
     </script>
 
     <style>
       body {
-        padding: 0 2px; /* Add some side padding to prevent clipping of focus outline. */
+        padding: 0 10px; /* Add some side padding to prevent clipping of focus outline. */
       }
 
       ul.text-examples {
@@ -545,26 +572,26 @@
   </figure>
 
   <figure>
-    <img src="image4.jpg" alt="">
+    <img src="image4.jpg" alt="" loading="lazy">
     <figcaption>Caption for image.</figcaption>
   </figure>
 
   <figure>
     <video controls>
-      <source src="coconut.mp4" type="video/mp4">
+      <source src="coconut.mp4" type="video/mp4" loading="lazy">
       Your browser does not support the video tag.
     </video>
     <figcaption>Caption for video.</figcaption>
   </figure>
 
   <figure>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/vEA8HpR_Azw?si=_TZpixa8hPluZYvN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/vEA8HpR_Azw?si=_TZpixa8hPluZYvN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" loading="lazy" allowfullscreen></iframe>
     <figcaption>Caption for iframe.</figcaption>
   </figure>
 
   <figure>
     <audio controls>
-      <source src="calm-waves-8052.m4a" type="audio/mp4">
+      <source src="calm-waves-8052.m4a" type="audio/mp4" loading="lazy">
       Your browser does not support the audio element.
     </audio>
     <figcaption>Caption for audio.</figcaption>
@@ -664,11 +691,11 @@
 
   <p>Below are examples of <code>&lt;image&gt;</code> elements, and how they can be styled by adding <code>&lt;class="border"&gt;</code> and/or <code>&lt;class="shadow"&gt;</code>.</p>
 
-  <img src="image1-500px.jpg" alt="">
+  <img src="image1-500px.jpg" alt="" loading="lazy">
 
-  <img src="image2-500px.jpg" alt="" class="border">
+  <img src="image2-500px.jpg" alt="" loading="lazy" class="border">
 
-  <img src="image3-500px.jpg" alt="" class="shadow">
+  <img src="image3-500px.jpg" alt="" loading="lazy" class="shadow">
 
   <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
@@ -687,7 +714,7 @@
   <p>Below is a <code>&lt;video&gt;</code> file using the browser's default controls:</p>
 
   <video controls>
-    <source src="coconut.mp4" type="video/mp4">
+    <source src="coconut.mp4" type="video/mp4" loading="lazy">
     Your browser does not support the video tag.
   </video>
 

@@ -6,16 +6,37 @@
     <title>Toddy.css</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="index.css">
+    <script src="theme-toggle.js" defer></script>
 </head>
 <body>
-    <div class="container">
+    <!-- Mobile Mode -->
+    <div class="container mobile-mode">
+      <aside class="controls">
+        <fieldset>
+            <label>
+                <input type="radio" name="theme" value="none">No CSS
+            </label>
+            <label>
+                <input type="radio" name="theme" value="light" checked>Toddy.css
+            </label>
+            <label>
+                <input type="radio" name="theme" value="dark">Dark mode
+            </label>
+        </fieldset>
+      </aside>
+      <main class="content">
+          <iframe id="themeFrame" src="demo-content.html" loading="lazy"></iframe>
+      </main>
+    </div>
+    <!-- Desktop Mode -->
+    <div class="container desktop-mode">
       <section class="demo-A">
         <h2>No CSS</h2>
-        <iframe src="demo.html"></iframe>
+        <iframe src="demo-content.html" loading="lazy"></iframe>
       </section>
       <section class="demo-B">
         <h2>🌴 Toddy.css 🥥</h2>
-        <iframe src="demo.html?style=toddy.css"></iframe>
+        <iframe src="demo-content.html?style=toddy.css" loading="lazy"></iframe>
       </section>
     </div>
 </body>

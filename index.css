@@ -11,6 +11,7 @@ html, body {
     height: 100vh;
     color: #fff;
     background-color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h2 {
@@ -18,12 +19,14 @@ h2 {
     margin-bottom: 10px;
     line-height: 1; /* To avoid emojis in one of the headers from making it taller */
 }
+.demo-A h2 {
+    font-family: none;
+}
 .demo-B h2 {
     color: #E48500;    /* Pico Pumpkin 350 */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* ------------------------- Layout ------------------------- */
+/* ------------------------- Layout (Desktop Mode) ------------------------- */
 
 .container {
     height: 100%;
@@ -61,6 +64,54 @@ iframe {
     width: 100%;
     height: 100%;
     background-color: white;
-    border: 10px solid white;
+    border: none;
     border-radius: 5px;
+}
+
+/* ------------------------- Layout (Mobile Mode) ------------------------- */
+
+.mobile-mode {
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+}
+@media (max-width: 800px) {
+    .desktop-mode {
+        display: none;
+    }
+    .mobile-mode {
+        display: flex;
+    }
+}
+
+.container .controls {
+    width: 100%;
+    margin-bottom: 10px;
+}
+fieldset {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: none;
+    text-align: center;
+    line-height: 1;
+}
+fieldset label {
+    margin: 5px 10px;
+}
+fieldset label input {
+    margin-right: 10px;
+}
+@media (max-width: 350px) {
+    fieldset {
+        flex-direction: column;
+        text-align: left;
+    }
+}
+
+.container .content {
+    max-width: 1000px;
+    width: 100%;       /* Important so that child elements can use the max-width. */
+    flex: 1;
+    flex-grow: 1;      /* Important so that the main element takes all the free space instead of the footer. */
 }
