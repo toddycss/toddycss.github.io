@@ -4,35 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Content</title>
-    <link id="themeStylesheet" rel="stylesheet" href="">
-
     <script>
-      // Dynamically load a stylesheet based on parameter in SRC from index.html.
-      // Use an IIFE (Immediately Invoked Function Expression) to speed up loading.
-      // (Using window.onload resulted in very slow loading.)
-      (function loadStyleSheet() {
-          const urlParams = new URLSearchParams(window.location.search);
-          const stylesheetName = urlParams.get('style');
-          const link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = stylesheetName;
-          document.head.appendChild(link);
-      })();
+      const params = new URLSearchParams(window.location.search);
+      const theme = params.get("style");
+      if (theme) {
+          document.write('<link rel="stylesheet" href="' + theme + '">');
+      }
+    </script>
 
-      /* Start of Theme Toggle for Mobile Mode (part 2/2) */
-      document.addEventListener("DOMContentLoaded", function () {
-        const themeStylesheet = document.getElementById("themeStylesheet");
+    <link id="themeLink" rel="stylesheet" href="">
+    <script>
+        /* Start of Theme Toggle for Mobile Mode (part 2/2) */
+        document.addEventListener("DOMContentLoaded", function () {
+        const themeLink = document.getElementById("themeLink");
         const body = document.body;
 
         function applyTheme(theme) {
             if (theme === "none") {
-                themeStylesheet.removeAttribute("href");
+                themeLink.removeAttribute("href");
                 body.classList.remove("dark-mode");
             } else if (theme === "light") {
-                themeStylesheet.setAttribute("href", "toddy.css");
+                themeLink.setAttribute("href", "toddy.css");
                 body.classList.remove("dark-mode");
             } else if (theme === "dark") {
-                themeStylesheet.setAttribute("href", "toddy.css");
+                themeLink.setAttribute("href", "toddy.css");
                 body.classList.add("dark-mode");
             }
         }
