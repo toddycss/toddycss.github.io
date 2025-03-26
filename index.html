@@ -6,6 +6,7 @@
     <title>Toddy.css</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="index.css">
+    
     <script src="theme-toggle.js" defer></script>
 </head>
 <body>
@@ -13,19 +14,38 @@
     <div class="container mobile-mode">
       <aside class="controls">
         <fieldset>
-            <label>
-                <input type="radio" name="theme" value="none">No CSS
-            </label>
-            <label>
-                <input type="radio" name="theme" value="light" checked>Toddy.css
-            </label>
-            <label>
-                <input type="radio" name="theme" value="dark">Dark mode
-            </label>
+          <label>
+            <input type="radio" name="theme" value="none">
+            <span>No CSS</span>
+          </label>
+          <label>
+            <input type="radio" name="theme" value="toddy" checked>
+            <span>Toddy</span>
+          </label>
+          <label>
+            <input type="radio" name="theme" value="pico">
+            <span>Pico</span>
+            <!-- Pico.css v2.1.1 (latest of as March 2025) -->
+          </label>
+          <label>
+            <input type="radio" name="theme" value="sakura">
+            <span>Sakura</span>
+            <!-- Sakura v1.5.0 (latest of as March 2025) -->
+          </label>
+          <label>
+            <input type="radio" name="theme" value="simple">
+            <span>Simple.css</span>
+            <!-- Simple.css v2.3.5 (latest of as March 2025) -->
+          </label>
+          <label>
+            <input type="radio" name="theme" value="mvp">
+            <span>MVP.css</span>
+            <!-- MVP.css v1.17 (latest of as March 2025) -->
+          </label>
         </fieldset>
       </aside>
       <main class="content">
-          <iframe id="themeFrame" src="demo-content.html" loading="lazy"></iframe>
+        <iframe id="themeFrame"><!-- Placeholder for theme-toggle.js --></iframe>
       </main>
     </div>
     <!-- Desktop Mode -->

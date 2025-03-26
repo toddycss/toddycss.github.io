@@ -5,42 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Content</title>
     <script>
+      /* Theme handling for both Desktop Mode & Mobile Mode (part 2/2) */
       const params = new URLSearchParams(window.location.search);
       const theme = params.get("style");
       if (theme) {
-          document.write('<link rel="stylesheet" href="' + theme + '">');
+          document.write('<link rel="stylesheet" href="css/' + theme + '">');
       }
     </script>
-
-    <link id="themeLink" rel="stylesheet" href="">
-    <script>
-        /* Start of Theme Toggle for Mobile Mode (part 2/2) */
-        document.addEventListener("DOMContentLoaded", function () {
-        const themeLink = document.getElementById("themeLink");
-        const body = document.body;
-
-        function applyTheme(theme) {
-            if (theme === "none") {
-                themeLink.removeAttribute("href");
-                body.classList.remove("dark-mode");
-            } else if (theme === "light") {
-                themeLink.setAttribute("href", "toddy.css");
-                body.classList.remove("dark-mode");
-            } else if (theme === "dark") {
-                themeLink.setAttribute("href", "toddy.css");
-                body.classList.add("dark-mode");
-            }
-        }
-        // Listen for theme preference changes from the parent:
-        window.addEventListener("message", (event) => {
-            if (event.data.theme) {
-                applyTheme(event.data.theme);
-            }
-        });
-      });
-      /* End of Theme Toggle for Mobile Mode (part 2/2) */
-    </script>
-
     <style>
       body {
         padding: 0 10px; /* Add some side padding to prevent clipping of focus outline. */

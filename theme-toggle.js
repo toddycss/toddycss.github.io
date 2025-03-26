@@ -1,36 +1,42 @@
-/* Start of Theme Toggle for Mobile Mode (part 1/2) */
-/* Used in index.html */
+/* Theme Toggle for Mobile Mode (part 1/2) */
 document.addEventListener("DOMContentLoaded", function () {
+  // Specify which radio buttons we'll be reading:
+  const radioButtons = document.querySelectorAll('input[name="theme"]');
+  // Specify the location of the iframe:
+  const container = document.querySelector("main.content");
 
-    // Specify which iFrame and radio buttons we are working with:
-    const iframe = document.getElementById("themeFrame");
-    const radioButtons = document.querySelectorAll('input[name="theme"]');
+  function applyTheme(theme) {
+    // Save the selected theme to local storage:
+    localStorage.setItem("theme", theme);
 
-    // Get stored theme preference or default to light:
-    let savedTheme = localStorage.getItem("theme") || "light";
+    // Build HTML code for a new iframe with the new theme:
+    const iframeSrc = "demo-content.html?style=" + theme + ".css";
+    const newIframe = document.createElement("iframe");
+    newIframe.id = "themeFrame";
+    newIframe.src = iframeSrc;
+    newIframe.loading = "eager"; // Important for immediate loading.
 
-    // Ensure the correct radio button is checked:
-    document.querySelector(`input[value="${savedTheme}"]`).checked = true;
+    // Replace the previous iframe:
+    const oldIframe = document.getElementById("themeFrame");
+    if (oldIframe) container.replaceChild(newIframe, oldIframe);
+    else container.appendChild(newIframe);
+  }
 
-    // Define function to send the theme preference to the iframe:
-    function sendThemeToIframe(theme) {
-        iframe.contentWindow.postMessage({ theme }, "*");
-        // Note: the iFrame will need it's own JS code for handling the theme preference.
-    }
+  // Read the previously set theme (if applicable). Default to "toddy" if none specified.
+  const savedTheme = localStorage.getItem("theme") || "toddy";
 
-    // Wait for iframe to load, then send theme:
-    iframe.onload = () => {
-        sendThemeToIframe(savedTheme);
-    };
+  // Set the radio button to match the set theme:
+  const defaultInput = document.querySelector(`input[value="${savedTheme}"]`);
+  if (defaultInput) defaultInput.checked = true;
 
-    // Listen for radio button changes:
-    radioButtons.forEach(radio => {
-        radio.addEventListener("change", (event) => {
-            let selectedTheme = event.target.value;
-            localStorage.setItem("theme", selectedTheme);
-            sendThemeToIframe(selectedTheme);
-        });
+  // Apple the set theme:
+  applyTheme(savedTheme);
+
+  // Listen for changes to radio buttons:
+  radioButtons.forEach((radio) => {
+    radio.addEventListener("change", (event) => {
+      const selectedTheme = event.target.value;
+      applyTheme(selectedTheme);
     });
-
+  });
 });
-/* End of Theme Toggle for Mobile Mode (part 1/2) */
