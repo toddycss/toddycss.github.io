@@ -5,9 +5,10 @@ document.querySelectorAll("pre").forEach(pre => {
 });
 
 
-/* Script to reposition Tooltips if/when they overflow. */
+/* Script for Attribute-based Tooltips */
 document.querySelectorAll("[data-tooltip]").forEach(parent => {
 
+    // Reposition tooltip if/when it overflows */
     function repositionTooltip() {
         // Exit if the parent element has the "css-only" class.
         if (parent.classList.contains("css-only")) return;
@@ -40,51 +41,13 @@ document.querySelectorAll("[data-tooltip]").forEach(parent => {
         // Apply the exact shift.
         this.style.setProperty("--tooltip-offset-x", `${shiftX}px`);
     }
+    
     // Attach both `mouseenter` and `focus` events.
     parent.addEventListener("mouseenter", repositionTooltip);
     parent.addEventListener("focus", repositionTooltip);
 });
 
-/*
-document.querySelectorAll("[data-tooltip]").forEach(parent => {
-    parent.addEventListener("mouseenter", function () {
-    // Exit if the parent element has the "css-only" class
-    if (this.classList.contains("css-only")) return;
-
-    // Create a reference to the pseudo-element using computed styles.
-    const beforeStyles = window.getComputedStyle(this, "::before");
-
-    // Ensure the tooltip is not empty (some browsers return `none` if empty).
-    if (!beforeStyles || beforeStyles.content === "none") return;
-
-    // Get the parent's width and position.
-    // (parent = the word you hover over to trigger the tooltip).
-    const parentRect = this.getBoundingClientRect();
-
-    // Get tooltip's width.
-    const tooltipWidth = parseFloat(beforeStyles.width);
-
-    // Calculates where the tooltip starts when centered over the parent.
-    const tooltipLeft = parentRect.left + (parentRect.width/2) - (tooltipWidth/2);
-
-    let shiftX = 0;
-
-    // Check if the tooltip overflows the right edge.
-    if (tooltipLeft + tooltipWidth > window.innerWidth) {
-        shiftX = window.innerWidth - (tooltipLeft + tooltipWidth);
-    }
-    // Check if the tooltip overflows the left edge.
-    else if (tooltipLeft < 0) {
-        shiftX = -tooltipLeft;
-    }
-    // Apply the exact shift
-    this.style.setProperty("--tooltip-offset-x", `${shiftX}px`);
-    });
-});
-*/
-
-
-
+/* Script for Class-based Tooltips */
 document.querySelectorAll(".tooltip-parent").forEach(parent => {
     /* In addition to the standard Hover-based and Focused-based behaviour, 
        this script enables:
@@ -194,140 +157,3 @@ document.querySelectorAll(".tooltip-parent").forEach(parent => {
         }
     });
 });
-
-
-/*
-
-
-
-document.querySelectorAll(".tooltip-parent").forEach(parent => {
-    const tooltip = parent.querySelector(".tooltip");
-    if (!tooltip) return; // Exit if no tooltip found
-
-    // Function to update tooltip position
-    function updateTooltipPosition() {
-        if (!tooltip) return;
-
-        // Ensure tooltip is visible on focus (related to the "toggleHideShow" function).
-        //tooltip.style.visibility = "visible";
-        //tooltip.style.opacity = "1";
-
-        // Update tooltip width every time (to avoid stale values).
-        // (This was done to fix a bug in which every 2nd mouseenter would not properly shiftX.)
-        tooltip.dataset.tooltipWidth = tooltip.offsetWidth;
-        let shiftX = 0;
-
-        const parentRect = parent.getBoundingClientRect();
-        const tooltipWidth = parseFloat(tooltip.dataset.tooltipWidth);
-
-        const tooltipLeft = parentRect.left + (parentRect.width / 2) - (tooltipWidth / 2);
-
-        // Check if the tooltip overflows the right edge
-        if (tooltipLeft + tooltipWidth > window.innerWidth) {
-            shiftX = window.innerWidth - (tooltipLeft + tooltipWidth);
-        }
-        // Check if the tooltip overflows the left edge
-        else if (tooltipLeft < 0) {
-            shiftX = -tooltipLeft;
-        }
-        // Apply the exact shift.
-        tooltip.style.setProperty("--tooltip-offset-x", `${shiftX}px`);
-    }
-
-    function hideTooltip() {
-        tooltip.style.visibility = "hidden";
-        tooltip.style.opacity = "0";
-    }
-
-    function showTooltip() {
-        tooltip.style.visibility = "visible";
-        tooltip.style.opacity = "1";
-    }
-
-    function toggleHideShow(event) {
-        if (event.key === "Enter") {
-            const isVisible = getComputedStyle(tooltip).visibility === "visible";
-
-            // Toggle visibility
-            if (isVisible) {
-                hideTooltip();
-            } else {
-                showTooltip();
-            }
-        }
-    }
-
-    // Attach event listeners for both hover and focus.
-    parent.addEventListener("mouseenter", updateTooltipPosition);
-    parent.addEventListener("focus", updateTooltipPosition);
-
-    // Hide tooltip on mouse leave (bug fix).
-    //parent.addEventListener("mouseleave", hideTooltip);
-
-    // Allow keyboard users to toggle tooltip using 'Enter' key...
-    parent.addEventListener("keydown", toggleHideShow);
-
-    // ...and ensure tooltip is hidden when focus is lost.
-    parent.addEventListener("blur", hideTooltip);
-});
-
-*/
-
-
-/*
-
-document.querySelectorAll(".tooltip-parent").forEach(parent => {
-    const tooltip = parent.querySelector(".tooltip");
-    if (!tooltip) return;
-
-    // Precalculate tooltip width and store it in a custom attribute.
-    // (This was done to fix a bug in which every 2nd mouseenter would not properly shiftX.)
-    tooltip.dataset.tooltipWidth = tooltip.offsetWidth;
-
-    parent.addEventListener("mouseenter", function () {
-        let shiftX = 0;
-        const parentRect = this.getBoundingClientRect();
-        const tooltipWidth = parseFloat(tooltip.dataset.tooltipWidth); // Use precalculated width
-
-        const tooltipLeft = parentRect.left + (parentRect.width / 2) - (tooltipWidth / 2);
-
-        // Check if the tooltip overflows the right edge
-        if (tooltipLeft + tooltipWidth > window.innerWidth) {
-            shiftX = window.innerWidth - (tooltipLeft + tooltipWidth);
-        }
-        // Check if the tooltip overflows the left edge
-        else if (tooltipLeft < 0) {
-            shiftX = -tooltipLeft;
-        }
-        tooltip.style.setProperty("--tooltip-offset-x", `${shiftX}px`);
-    });
-});
-*/
-
-/*
-document.querySelectorAll(".tooltip-parent").forEach(parent => {
-    parent.addEventListener("mouseover", function () {
-        const tooltip = this.querySelector(".tooltip");
-        if (!tooltip) return; // Exit if no tooltip found.
-
-        // Get parent and tooltip dimensions.
-        const parentRect = this.getBoundingClientRect();
-        const tooltipRect = tooltip.getBoundingClientRect();
-
-        let shiftX = 0;
-
-        // Check if the tooltip overflows the right edge.
-        if (tooltipRect.right > window.innerWidth) {
-            shiftX = window.innerWidth - tooltipRect.right;
-        }
-        // Check if the tooltip overflows the left edge.
-        else if (tooltipRect.left < 0) {
-            shiftX = -tooltipRect.left;
-        }
-        // Apply the exact shift using CSS variable.
-        tooltip.style.setProperty("--tooltip-offset-x", `${shiftX}px`);
-
-        // BUG: 
-    });
-});
-*/
