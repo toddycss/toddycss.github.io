@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (oldIframe) container.replaceChild(newIframe, oldIframe);
       else container.appendChild(newIframe);
 
-      // ⬇️ Hide toggle when "No CSS" is selected
+      // Hide the Darkmode Button when "No CSS" is selected:
       const isNoCSS = ( framework === 'none' );
       document.querySelector('.theme-toggle-button').style.display = isNoCSS ? 'none' : '';
     }
