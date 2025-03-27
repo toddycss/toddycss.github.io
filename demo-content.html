@@ -10,20 +10,36 @@
         (Part 1/2 is in style-settings.js)
       */
       const params = new URLSearchParams(window.location.search);
-      const filename = params.get("framework");
+      const framework = params.get("framework");
       const theme = params.get("theme");
 
       if (theme) {
         document.documentElement.setAttribute("data-theme", theme);
       }
-      if (filename) {
+      if (framework && framework !== 'none.css') {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = 'css/' + filename;
+        link.href = 'css/' + framework;
+
+        link.onload = () => {
+          document.documentElement.classList.add('ready'); // Unhide content.
+        };
         document.head.appendChild(link);
+      } else {
+        // 'none.css' will never load, so need to jump ahead to this:
+        document.documentElement.classList.add('ready');
       }
     </script>
     <style>
+      html {
+        visibility: hidden; /* Note: content is hdiden by default */
+        opacity: 0;
+        transition: opacity 0.2s ease-in; /* Smooth fade-in for visibiltiy toggle. */
+      }
+      html.ready {
+        visibility: visible;
+        opacity: 1;
+      }
       body {
         padding: 0 10px; /* Add some side padding to prevent clipping of focus outline. */
       }

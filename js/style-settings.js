@@ -5,7 +5,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const darkmodeButton = document.getElementById('theme-toggle');
     const frameworkButtons = document.querySelectorAll('input[name="framework"]');
-    const container = document.querySelector("main.content");
   
     // Load theme from storage or system preference
     function getInitialTheme() {
@@ -30,17 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
       // Make sure the toggle button matches the saved theme:
       darkmodeButton.checked = ( theme === 'dark' );
   
-      // Create iFrame:
-      const src = `demo-content.html?theme=${theme}&framework=${framework}.css`;
-      const newIframe = document.createElement("iframe");
-      newIframe.id = "demoFrame";
-      newIframe.src = src;
-      newIframe.loading = "eager";
-  
-      // Replace the previous iframe:
-      const oldIframe = document.getElementById("demoFrame");
-      if (oldIframe) container.replaceChild(newIframe, oldIframe);
-      else container.appendChild(newIframe);
+      // Update the iFrame:
+      const iframe = document.getElementById('demoFrame');
+      const newSrc = `demo-content.html?theme=${theme}&framework=${framework}.css`;
+      if (iframe.src !== newSrc) {
+        iframe.src = newSrc;
+      }
 
       // Hide the Darkmode Button when "No CSS" is selected:
       const isNoCSS = ( framework === 'none' );
