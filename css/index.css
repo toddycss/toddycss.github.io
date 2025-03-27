@@ -13,6 +13,10 @@ html, body {
     background-color: #333;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+    background-color: #333 !important;
+}
 
 h2 {
     text-align: center;
@@ -161,7 +165,7 @@ input[type="radio"]:checked + span::after {
     font-weight: normal;
     font-size: 12px;
 }
-/* Hide radio button's circle */
+/* Hide the radio button's icon */
 input[type="radio"] {
     position: absolute;
     opacity: 0;

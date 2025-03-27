@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toddy.css</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="css/index.css">
-
-    <script src="js/toggle-theme.js" defer></script>
-
+    <link rel="stylesheet" href="css/theme-toggle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <!-- Mobile Mode -->
@@ -16,40 +15,49 @@
       <aside class="controls">
         <fieldset>
           <label>
-            <input type="radio" name="theme" value="none">
+            <input type="radio" name="framework" value="none">
             <span>No CSS</span>
           </label>
           <label>
-            <input type="radio" name="theme" value="toddy" checked>
+            <input type="radio" name="framework" value="toddy" checked>
             <span>Toddy</span>
           </label>
           <label>
-            <input type="radio" name="theme" value="pico">
+            <input type="radio" name="framework" value="pico">
             <span>Pico</span>
             <!-- Pico.css v2.1.1 (latest of as March 2025) -->
           </label>
           <label>
-            <input type="radio" name="theme" value="sakura">
+            <input type="radio" name="framework" value="sakura">
             <span>Sakura</span>
             <!-- Sakura v1.5.0 (latest of as March 2025) -->
           </label>
           <label>
-            <input type="radio" name="theme" value="simple">
+            <input type="radio" name="framework" value="simple">
             <span>Simple.css</span>
             <!-- Simple.css v2.3.5 (latest of as March 2025) -->
           </label>
           <label>
-            <input type="radio" name="theme" value="mvp">
+            <input type="radio" name="framework" value="mvp">
             <span>MVP.css</span>
             <!-- MVP.css v1.17 (latest of as March 2025) -->
           </label>
         </fieldset>
       </aside>
       <main class="content">
-        <iframe id="themeFrame"><!-- Placeholder for theme-toggle.js --></iframe>
+        <iframe id="demoFrame"><!-- Placeholder for style-settings.js --></iframe>
       </main>
-
+      <!-- Theme Toggle -->
+      <div class="theme-toggle-button">
+        <label class="checkbox-label">
+          <input class="checkbox" type="checkbox" id="theme-toggle" />
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-sun"></i>
+          <span class="ball"></span>
+        </label>
+      </div>
     </div>
+
     <!-- Desktop Mode -->
     <div class="container desktop-mode">
       <section class="demo-A">
@@ -58,8 +66,11 @@
       </section>
       <section class="demo-B">
         <h2>🌴 Toddy.css 🥥</h2>
-        <iframe src="demo-content.html?style=toddy.css" loading="lazy"></iframe>
+        <iframe src="demo-content.html?framework=toddy.css" loading="lazy"></iframe>
       </section>
     </div>
+
+    <!-- JavaScript -->
+    <script src="js/style-settings.js" defer></script>
 </body>
 </html>

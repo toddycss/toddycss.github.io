@@ -1,0 +1,74 @@
+/* Button for toggling between Light-mode & Dark-mode */
+.theme-toggle-button {
+    position: fixed;
+    bottom: 15px;
+    right: 25px;
+    z-index: 1000;
+}
+
+/* Hide the checkbox's icon */
+.theme-toggle-button .checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+/* Light mode (DEFAULT) */
+.checkbox-label {
+    cursor: pointer;
+    width: 50px;
+    height: 26px;
+    padding: 5px;
+    background-color: white; /* light mode by default (sun visible) */
+    border: 1px solid #333;
+    border-radius: 50px;
+
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    transform: scale(1.5);
+    transition: background-color 0.3s ease;
+}
+.checkbox-label .ball {
+    background-color: lightgray !important;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 3px;  /* Divide by 2 the remainder of: 26px - 18px - 2px (border top & bototm) */
+    left: 3px; /* Same as top */
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+.checkbox-label .fa-sun {
+    color: #f39c12;
+    opacity: 1; /* Visible by default */
+    transition: opacity 0.3s ease;
+}
+
+/* Dark mode = .checkbox:checked */
+.checkbox-label:has(.checkbox:checked) {
+    background-color: #111;
+}
+.checkbox-label:has(.checkbox:checked) .ball {
+    transform: translateX(24px);
+    background-color: lightgray; /* dark mode ball */
+}
+
+.checkbox-label .fa-moon {
+    color: lightblue; /* Formerly f1c40f */
+    opacity: 0; /* Invisible by default */
+    transition: opacity 0.3s ease;
+}
+.checkbox-label:has(.checkbox:checked) .fa-moon {
+    opacity: 1;
+}
+.checkbox-label:has(.checkbox:checked) .fa-sun {
+    opacity: 0;
+}
+
+/*
+    Credits:
+    Based on Umer_Farooq's design...
+    https://codepen.io/Umer_Farooq/pen/eYJgKGN
+*/

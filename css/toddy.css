@@ -864,7 +864,10 @@ figure > video {
 /* --------------------------------------------------------------------------- */
 
 /* Optional class for dark mode */
-body.dark-mode {
+html[data-theme='dark'],
+body[data-theme='dark'],
+html.dark,
+body.dark {
     color: white;
     background-color: black;
     /* 
@@ -872,3 +875,4 @@ body.dark-mode {
       Proper dark-mode support is coming in a later version.
     */
 }
+

@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Content</title>
     <script>
-      /* Theme handling for both Desktop Mode & Mobile Mode (part 2/2) */
+      /* 
+         Part 2/2 of Theme & Framework handling.
+        (Part 1/2 is in style-settings.js)
+      */
       const params = new URLSearchParams(window.location.search);
-      const theme = params.get("style");
+      const filename = params.get("framework");
+      const theme = params.get("theme");
+
       if (theme) {
-          document.write('<link rel="stylesheet" href="css/' + theme + '">');
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+      if (filename) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'css/' + filename;
+        document.head.appendChild(link);
       }
     </script>
     <style>
@@ -710,7 +721,7 @@
 
   <p>Paragraph example using <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-
+  <!-- JavaScript -->
   <script src="js/toddy.js"></script>
 
 </body>
