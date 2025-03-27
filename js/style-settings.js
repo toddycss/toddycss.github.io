@@ -41,6 +41,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const oldIframe = document.getElementById("demoFrame");
       if (oldIframe) container.replaceChild(newIframe, oldIframe);
       else container.appendChild(newIframe);
+
+      // ⬇️ Hide toggle when "No CSS" is selected
+      const isNoCSS = ( framework === 'none' );
+      document.querySelector('.theme-toggle-button').style.display = isNoCSS ? 'none' : '';
     }
   
     //------------------------------------------------------------------------

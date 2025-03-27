@@ -224,3 +224,63 @@ label, legend, fieldset {
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
+
+/* Taken from sakura-dark.css */
+html[data-theme="dark"] {
+  body {
+    color: #c9c9c9;
+    background-color: #222222;
+  }
+  hr {
+    border-color: #ffffff;
+  }
+  a {
+    color: #ffffff;
+  }
+  a:visited {
+    color: #e6e6e6;
+  }
+  a:hover {
+    color: #c9c9c9;
+    border-bottom: 2px solid #c9c9c9;
+  }
+  blockquote {
+    border-left: 5px solid #ffffff;
+    background-color: #4a4a4a;
+  }
+  pre {
+    background-color: #4a4a4a;
+  }
+  code, kbd, samp {
+    background-color: #4a4a4a;
+  }
+  td, th {
+    border-bottom: 1px solid #4a4a4a;
+  }
+  input, textarea {
+    border: 1px solid #c9c9c9;
+  }
+  input:focus, textarea:focus {
+    border: 1px solid #ffffff;
+  }
+  .button, button, input[type=submit], input[type=reset], input[type=button], input[type=file]::file-selector-button {
+    background-color: #ffffff;
+    color: #222222;
+    border: 1px solid #ffffff;
+  }
+  .button:hover, button:hover, input[type=submit]:hover, input[type=reset]:hover, input[type=button]:hover, input[type=file]::file-selector-button:hover {
+    background-color: #c9c9c9;
+    color: #222222;
+  }
+  textarea, select, input {
+    color: #c9c9c9;
+    background-color: #4a4a4a;
+    border: 1px solid #4a4a4a;
+  }
+  textarea:focus, select:focus, input:focus {
+    border: 1px solid #ffffff;
+  }
+  input[type=checkbox]:focus {
+    outline: 1px dotted #ffffff;
+  }
+}
