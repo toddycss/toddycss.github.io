@@ -15,19 +15,6 @@ html, body {
 }
 html[data-theme="dark"],
 html[data-theme="dark"] body {
-    background-color: #333 !important;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 10px;
-    line-height: 1; /* To avoid emojis in one of the headers from making it taller */
-}
-.demo-A h2 {
-    font-family: none;
-}
-.demo-B h2 {
-    color: #E48500;    /* Pico Pumpkin 350 */
 }
 
 /* ------------------------- Layout (Desktop Mode) ------------------------- */
@@ -39,7 +26,6 @@ h2 {
     flex-direction: row;
     justify-content: center;
 }
-
 .demo-A,
 .demo-B {
     /* Bug alert: for odd-numbered viewport widths, the right side of the iFrame will get clipped by 1px. */
@@ -47,7 +33,7 @@ h2 {
     height: 100%;
     width: 50%;
     max-width: 900px;
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 20px;
 
     display: flex;
@@ -79,7 +65,7 @@ iframe {
     flex-direction: column;
     padding: 20px;
 }
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     .desktop-mode {
         display: none;
     }
@@ -93,12 +79,14 @@ iframe {
 }
 .container .content {
     max-width: 1000px;
-    width: 100%;       /* Important so that child elements can use the max-width. */
+    width: 100%;    /* Important so that child elements can use the max-width. */
     flex: 1;
-    flex-grow: 1;      /* Important so that the main element takes all the free space instead of the footer. */
+    flex-grow: 1;  /* Important so that the main element takes all the free space instead of the footer. */
 }
 
-fieldset {
+/* ---------- Framework Toggle -- Radio Buttons (Mobile Mode) ---------- */
+
+.controls fieldset {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -109,7 +97,7 @@ fieldset {
     font-size: 14px;
     gap: 5px;
 }
-fieldset label {
+.controls fieldset label {
     cursor: pointer;
     display: inline-flex;
     flex: 1 1 0; /* All items grow equally. */
@@ -117,60 +105,79 @@ fieldset label {
     max-width: 100%;
 }
 @media (max-width: 730px) {
-    fieldset label {
+    .controls fieldset label {
         flex: 1 1 calc(33.333% - 5px); /* 3 items per row, minus gap. */
     }
 }
 
-input[type="radio"] + span {
+.controls input[type="radio"] + span {
     width: 100%;
     padding: 5px;
-    background-color: #555;
-    border: 2px solid black;
+    color: #ccc;
+    background-color: #333;
+    border: 1px dotted #555;
     border-radius: 5px;
 }
-input[type="radio"] + span:hover {
-    background-color: orange;
+.controls input[type="radio"] + span:hover {
+    color: orange;
+    font-weight: bold;
 }
-input[type="radio"]:checked + span {
+.controls input[type="radio"]:checked + span {
     cursor: default;
     color: orange;
     font-weight: bold;
-    border: none;
-    background: none;
+    border: 1px solid #666;
+    background-color: #555;
 }
-/* Add LEFT arrow before label */
-input[type="radio"]:checked + span::before {
-    /*
-    content: "⇦\00a0\00a0";
-    content: "«\00a0\00a0";
-    content: "⇠\00a0\00a0";
-    content: "←\00a0\00a0";
-    */
-    content: "◄\00a0\00a0";
-    color: white;
-    font-weight: normal;
-    font-size: 12px;
-}
-/* Add RIGHT arrow after label */
-input[type="radio"]:checked + span::after {
-    /*
-    content: "\00a0\00a0⇨";
-    content: "\00a0\00a0»";
-    content: "\00a0\00a0⇢";
-    content: "\00a0\00a0→";
-    */ 
-    content: "\00a0\00a0►";
-    color: white;
-    font-weight: normal;
-    font-size: 12px;
-}
+
 /* Hide the radio button's icon */
-input[type="radio"] {
+.controls input[type="radio"] {
     position: absolute;
     opacity: 0;
     pointer-events: none;
     /* Do NOT use display: none;
        This will prevent you from being able to use 
        arrow keys to switch between the options. */
+}
+
+/* ---------- Framework Toggle -- Dropdown Menus (Desktop Mode) ---------- */
+
+.inline-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    margin-inline: auto;
+}
+.inline-control label {
+    white-space: nowrap;
+}
+.inline-control select {
+    min-width: 150px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+    color: orange;
+    background-color: #555;
+    border: 1px solid #666;
+    border-radius: 5px;
+    padding: 5px 25px 5px 10px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    appearance: none; /* Hide the default down arrow */
+  
+    /* Create a new down arrow */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23f97316'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239C5900'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23FFA500'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px auto;
+}
+.inline-control select:hover {
+    background-color: #666;
+}
+.inline-control select:focus {
+    border-color: orange;
+    outline: none;
 }
