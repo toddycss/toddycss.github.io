@@ -3,10 +3,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const selectA = document.getElementById("framework-a"); // desktop & mobile
   const selectB = document.getElementById("framework-b"); // desktop-only
-  const selectC = document.querySelectorAll('input[name="framework-c"]'); // mobile-only
+  const radioA = document.querySelectorAll('input[name="framework-c"]'); // mobile-only
+
   const iframeA = document.getElementById("iframe-a");    // desktop-only
   const iframeB = document.getElementById("iframe-b");    // desktop-only
-  const iframeC = document.getElementById("iframe-c");    // mobile-only
+
+  function getStoredFrameworkA() {
+    return localStorage.getItem("framework-a") || "none";
+  }
+  function getStoredFrameworkB() {
+    return localStorage.getItem("framework-b") || "toddy";
+  }
+  function getStoredTheme() {
+    return localStorage.getItem('theme') || "light";
+  }
+  function getCurrentTheme() {
+    return darkmodeButton.checked ? "dark" : "light";
+  }
 
   function applyTheme(theme) {
     localStorage.setItem("theme", theme);
@@ -15,46 +28,50 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateIframe(iframe, framework) {
-    const theme = darkmodeButton.checked ? "dark" : "light";
+    const theme = getCurrentTheme();
     const css = ( framework === "none" ) ? "none" : `${framework}.css`;
-    iframe.src = `demo-content.html?theme=${theme}&framework=${css}`;
+    const newSrc = `demo-content.html?theme=${theme}&framework=${css}`;
+    if (iframe.src !== newSrc) {
+      iframe.src = newSrc;
+    }
+    updateThemeToggleVisibility();
   }
 
-  function syncFrameworkAC(value) {
-    localStorage.setItem("framework-a", value); // Use a single shared key
-    localStorage.setItem("framework-c", value);
+  function syncFrameworkA(value) {
+    // Use a single shared key for dropdown menu + radio buttons.
+    localStorage.setItem("framework-a", value); 
 
     if (selectA) selectA.value = value;
-    selectC.forEach(radio => {
-      radio.checked = ( radio.value === value );
+    radioA.forEach(radio => {
+      radio.checked = (radio.value === value);
     });
 
     if (iframeA) updateIframe(iframeA, value);
-    if (iframeC) updateIframe(iframeC, value);
-
-    updateThemeToggleVisibility(value);
   }
 
-  function updateThemeToggleVisibility(framework) {
-    const isNoCSS = ( framework === "none" );
-    const isMobile = document.querySelector('.mobile-mode')?.offsetParent !== null;
-    document.querySelector('.theme-toggle-button').style.display = (isNoCSS && isMobile) ? 'none' : '';
+  function updateThemeToggleVisibility() {
+    const frameworkA = getStoredFrameworkA();
+    const frameworkB = getStoredFrameworkB();
+    const demoBisHidden = document.querySelector('.demo-B')?.offsetParent === null;
 
-    // Note: this code is missing an edge case:
-    // In desktop mode, if both frameworks are set to "none", then the Theme Toggle should disappear.
+    const shouldHideToggle =
+    (frameworkA === "none" && frameworkB === "none") ||
+    (frameworkA === "none" && demoBisHidden);
+
+    document.querySelector('.theme-toggle-button').style.display = shouldHideToggle ? 'none' : '';
   }
 
   //------------------------------------------------------------------------
   // Read the initial saved values (if applicable).
-  const initialTheme = localStorage.getItem('theme') || "light";
-  const initialFrameworkAC = localStorage.getItem("framework-a") || "none";
-  const initialFrameworkB = localStorage.getItem("framework-b") || "toddy";
+  const initialTheme = getStoredTheme();
+  const initialFrameworkA = getStoredFrameworkA();
+  const initialFrameworkB = getStoredFrameworkB();
 
   // Apply initial theme.
   applyTheme(initialTheme);
 
   // Apply initial framework to iFrameA & iFrameC.
-  syncFrameworkAC(initialFrameworkAC); 
+  syncFrameworkA(initialFrameworkA); 
 
   // Apply initial framework to iFrameB (if visible).
   if (selectB && iframeB) {
@@ -63,10 +80,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Listen for changes to framework radio buttons (mobile).
-  selectC.forEach(radio => {
+  radioA.forEach(radio => {
     radio.addEventListener("change", (e) => {
       if (e.target.checked) {
-        syncFrameworkAC(e.target.value);
+        syncFrameworkA(e.target.value);
       }
     });
   });
@@ -74,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Listen for changes to framework dropdown menus (desktop).
   if (selectA) {
     selectA.addEventListener("change", (e) => {
-      syncFrameworkAC(e.target.value);
+      syncFrameworkA(e.target.value);
     });
   }
   if (selectB) {
@@ -86,21 +103,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Listen for changes to theme toggle button.
   darkmodeButton.addEventListener('change', () => {
-    const theme = darkmodeButton.checked ? "dark" : "light";
+    const theme = getCurrentTheme();
     applyTheme(theme);
 
-    const frameworkAC = localStorage.getItem("framework-a") || "toddy";
-    const frameworkB = localStorage.getItem("framework-b") || "toddy";
-
-    updateIframe(iframeA, frameworkAC);
-    updateIframe(iframeC, frameworkAC);
+    const frameworkA = getStoredFrameworkA();
+    const frameworkB = getStoredFrameworkB();
+    updateIframe(iframeA, frameworkA);
     updateIframe(iframeB, frameworkB);
   });
 
   // Listen for window resize (to show/hide theme toggle button).
   window.addEventListener('resize', () => {
-    const currentFramework = localStorage.getItem("framework-a") || "none";
-    updateThemeToggleVisibility(currentFramework);
+    updateThemeToggleVisibility();
   });
 
 });

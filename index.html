@@ -15,10 +15,12 @@
     <link rel="preload" href="css/mvp.css" as="style">
 </head>
 <body>
-    <!-- Mobile Mode -->
-    <div class="container mobile-mode">
-      <aside class="controls">
-        <fieldset>
+    <div class="container">
+
+      <!-- Demo A - Always visible -->
+      <section class="demo-A">
+        <!-- Controls for Mobile Mode -->
+        <fieldset class="mobile-controls">
           <label>
             <input type="radio" name="framework-c" value="none">
             <span>No CSS</span>
@@ -48,19 +50,9 @@
             <!-- MVP.css v1.17 (latest of as March 2025) -->
           </label>
         </fieldset>
-      </aside>
-      <main class="content">
-        <!-- iFrame to be updated by style-settings.js -->
-        <iframe id="iframe-c" src="" loading="eager"></iframe>
-      </main>
-    </div>
-
-    <!-- Desktop Mode -->
-    <div class="container desktop-mode">
-      <section class="demo-A">
-        <div class="inline-control">
-          <label for="framework-a" style="display:none;"><!--Framework:--></label>
-          <select id="framework-a" class="framework-select">
+        <!-- Controls for Desktop Mode -->
+        <fieldset class="desktop-controls">
+          <select id="framework-a">
             <option value="none" selected>No CSS</option>
             <option value="toddy">Toddy</option>
             <option value="pico">Pico</option>
@@ -68,13 +60,15 @@
             <option value="sakura">Sakura</option>
             <option value="mvp">MVP.css</option>
           </select>
-        </div>
-        <iframe id="iframe-a" src="demo-content.html" loading="lazy"></iframe>
+        </fieldset>
+        <!-- iframeA -->
+        <iframe id="iframe-a"><!-- Do NOT include SRC to avoid FOUC --></iframe>
       </section>
+
+      <!-- Demo B - Only visible in Desktop Mode -->
       <section class="demo-B">
-        <div class="inline-control">
-          <label for="framework-b" style="display:none;"><!--Framework:--></label>
-          <select id="framework-b" class="framework-select">
+        <fieldset class="desktop-controls">
+          <select id="framework-b">
             <option value="none">No CSS</option>
             <option value="toddy" selected>Toddy</option>
             <option value="pico">Pico</option>
@@ -82,9 +76,11 @@
             <option value="sakura">Sakura</option>
             <option value="mvp">MVP.css</option>
           </select>
-        </div>
-        <iframe id="iframe-b" src="demo-content.html?framework=toddy.css" loading="lazy"></iframe>
+        </fieldset>
+        <!-- iframeB -->
+        <iframe id="iframe-b"><!-- Do NOT include SRC to avoid FOUC --></iframe>
       </section>
+
     </div>
 
     <!-- Theme Toggle -->

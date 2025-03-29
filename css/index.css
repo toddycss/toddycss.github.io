@@ -31,7 +31,6 @@ html[data-theme="dark"] body {
     /* Bug alert: for odd-numbered viewport widths, the right side of the iFrame will get clipped by 1px. */
     flex-basis: calc(50% - 0.5px);  /* Forces even number width to fix subpixel rounding bug. */
     height: 100%;
-    width: 50%;
     max-width: 900px;
     padding-top: 10px;
     padding-bottom: 20px;
@@ -50,44 +49,24 @@ html[data-theme="dark"] body {
 
 /* ------------------------- Demo Content ------------------------- */
 
+fieldset {
+    border: none;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
 iframe {
     width: 100%;
     height: 100%;
     background-color: white;
-    border: none;
+    border: 2px solid #222;
     border-radius: 5px;
-}
-
-/* ------------------------- Layout (Mobile Mode) ------------------------- */
-
-.mobile-mode {
-    display: none;
-    flex-direction: column;
-    padding: 20px;
-}
-@media (max-width: 900px) {
-    .desktop-mode {
-        display: none;
-    }
-    .mobile-mode {
-        display: flex;
-    }
-}
-.container .controls {
-    width: 100%;
-    margin-bottom: 10px;
-}
-.container .content {
-    max-width: 1000px;
-    width: 100%;    /* Important so that child elements can use the max-width. */
-    flex: 1;
-    flex-grow: 1;  /* Important so that the main element takes all the free space instead of the footer. */
 }
 
 /* ---------- Framework Toggle -- Radio Buttons (Mobile Mode) ---------- */
 
-.controls fieldset {
-    display: flex;
+fieldset.mobile-controls {
+    display: none;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around; /* Centers the flex children. */
@@ -97,7 +76,7 @@ iframe {
     font-size: 14px;
     gap: 5px;
 }
-.controls fieldset label {
+fieldset.mobile-controls label {
     cursor: pointer;
     display: inline-flex;
     flex: 1 1 0; /* All items grow equally. */
@@ -105,12 +84,12 @@ iframe {
     max-width: 100%;
 }
 @media (max-width: 730px) {
-    .controls fieldset label {
+    fieldset.mobile-controls label {
         flex: 1 1 calc(33.333% - 5px); /* 3 items per row, minus gap. */
     }
 }
 
-.controls input[type="radio"] + span {
+fieldset.mobile-controls input[type="radio"] + span {
     width: 100%;
     padding: 5px;
     color: #ccc;
@@ -118,11 +97,11 @@ iframe {
     border: 1px dotted #555;
     border-radius: 5px;
 }
-.controls input[type="radio"] + span:hover {
+fieldset.mobile-controls input[type="radio"] + span:hover {
     color: orange;
     font-weight: bold;
 }
-.controls input[type="radio"]:checked + span {
+fieldset.mobile-controls input[type="radio"]:checked + span {
     cursor: default;
     color: orange;
     font-weight: bold;
@@ -131,7 +110,7 @@ iframe {
 }
 
 /* Hide the radio button's icon */
-.controls input[type="radio"] {
+fieldset.mobile-controls input[type="radio"] {
     position: absolute;
     opacity: 0;
     pointer-events: none;
@@ -142,17 +121,9 @@ iframe {
 
 /* ---------- Framework Toggle -- Dropdown Menus (Desktop Mode) ---------- */
 
-.inline-control {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 10px;
-    margin-inline: auto;
-}
-.inline-control label {
-    white-space: nowrap;
-}
-.inline-control select {
+fieldset.desktop-controls select {
+    display: block;
+    margin: 0 auto;
     min-width: 150px;
     cursor: pointer;
     font: inherit;
@@ -174,10 +145,27 @@ iframe {
     background-position: right 10px center;
     background-size: 10px auto;
 }
-.inline-control select:hover {
+fieldset.desktop-controls select:hover {
     background-color: #666;
 }
-.inline-control select:focus {
+fieldset.desktop-controls select:focus {
     border-color: orange;
     outline: none;
+}
+
+/* ------------------------- MOBILE MODE ------------------------- */
+
+/* Needs to go at the bottom to override other CSS. */
+@media (max-width: 900px) {
+    .demo-A {
+        flex-basis: 100%;
+        padding-right: 20px;
+    }
+    fieldset.mobile-controls {
+        display: flex;
+    }
+    .demo-B,
+    fieldset.desktop-controls {
+        display: none;
+    }
 }
